@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 12 IP Python - Quiz by Priyanshu Gupta</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Fredoka', 'cursive'],
+                        romantic: ['Comfortaa', 'cursive'],
+                    },
+                    colors: {
+                        softpink: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#4c0519',
+                        },
+                        blush: {
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f472b6',
+                            400: '#e879f9',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#500724',
+                        },
+                        joyful: {
+                            gold: '#fbbf24',
+                            amber: '#f59e0b',
+                            emerald: '#10b981',
+                            mint: '#34d399'
+                        }
+                    },
+                    animation: {
+                        'float-slow': 'float 5s ease-in-out infinite',
+                        'float-fast': 'float 3s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2.2s ease-in-out infinite',
+                        'shake': 'shake 0.4s cubic-bezier(.36,.07,.19,.97) both',
+                        'pop-in': 'popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                        'boy-bounce': 'boyBounce 1.8s ease-in-out infinite',
+                        'sparkle-spin': 'sparkleSpin 8s linear infinite',
+                        'heart-beat': 'heartBeat 1.3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(4deg)' },
+                        },
+                        boyBounce: {
+                            '0%, 100%': { transform: 'translateY(0px) scale(1)' },
+                            '50%': { transform: 'translateY(-8px) scale(1.03)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(244, 114, 182, 0.4), 0 0 40px rgba(251, 191, 36, 0.25)' },
+                            '50%': { boxShadow: '0 0 38px rgba(244, 114, 182, 0.7), 0 0 65px rgba(251, 191, 36, 0.45)' },
+                        },
+                        shake: {
+                            '10%, 90%': { transform: 'translate3d(-2px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(4px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-6px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(6px, 0, 0)' },
+                        },
+                        popIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.88) translateY(12px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        },
+                        sparkleSpin: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' }
+                        },
+                        heartBeat: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.15)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Soft Blush & Velvet Theme Background */
+        .bg-soft-blush {
+            background: linear-gradient(135deg, #2b0312 0%, #4a0722 25%, #500724 50%, #3d0520 75%, #1a010b 100%);
+            background-attachment: fixed;
+        }
+
+        .bg-soft-blush::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 15% 18%, rgba(244, 114, 182, 0.25) 0%, transparent 45%),
+                radial-gradient(circle at 85% 25%, rgba(251, 191, 36, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(236, 72, 153, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(192, 132, 252, 0.18) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(50, 7, 36, 0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(251, 207, 232, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        /* Celebration Glow */
+        .celebrate-bg {
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.35) 0%, rgba(52, 211, 153, 0.12) 60%, transparent 100%);
+            transition: all 0.4s ease;
+        }
+
+        /* Sad Tone Overlay */
+        .sad-bg {
+            background: radial-gradient(circle, rgba(225, 29, 72, 0.32) 0%, rgba(190, 18, 60, 0.12) 60%, transparent 100%);
+            transition: all 0.4s ease;
+        }
+
+        /* Interactive Canvases */
+        #fireworksCanvas, #cursorCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 95;
+        }
+
+        #cursorCanvas {
+            z-index: 90;
+        }
+
+        /* Floating Interactive Elements */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            animation: elementFloat 2.2s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+            z-index: 60;
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 12px rgba(244, 114, 182, 0.85));
+        }
+
+        @keyframes elementFloat {
+            0% { opacity: 1; transform: translateY(0) scale(0.6) rotate(0deg); }
+            50% { opacity: 0.9; transform: translateY(-80px) scale(1.35) rotate(15deg); }
+            100% { opacity: 0; transform: translateY(-160px) scale(1.7) rotate(-15deg); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 2, 12, 0.8);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(244, 114, 182, 0.5);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(244, 114, 182, 0.85);
+        }
+    </style>
+</head>
+<body class="bg-soft-blush text-blush-100 min-h-screen flex flex-col justify-between font-sans relative overflow-x-hidden transition-all duration-500 selection:bg-blush-500 selection:text-white">
+
+    <canvas id="cursorCanvas"></canvas>
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- Floating Background Decor -->
+    <div id="particlesContainer" class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <span class="absolute top-10 left-[7%] text-3xl opacity-30 animate-float-slow">💖</span>
+        <span class="absolute top-1/4 right-[9%] text-4xl opacity-25 animate-float-fast">✨</span>
+        <span class="absolute bottom-1/3 left-[5%] text-4xl opacity-30 animate-float-fast">🌸</span>
+        <span class="absolute bottom-10 right-[12%] text-3xl opacity-25 animate-float-slow">💕</span>
+        <span class="absolute top-1/2 left-[88%] text-3xl opacity-25 animate-float-slow">🐍</span>
+        <span class="absolute top-16 right-[28%] text-2xl opacity-20 animate-float-fast">🎆</span>
+    </div>
+
+    <header class="relative z-10 w-full border-b border-blush-800/60 bg-blush-950/60 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="quizApp.resetToHome()">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blush-500 via-blush-300 to-amber-300 flex items-center justify-center text-slate-900 shadow-lg font-bold text-xl animate-pulse-glow">
+                    <i class="fa-brands fa-python text-2xl text-blush-950"></i>
+                </div>
+                <div>
+                    <span class="font-display font-extrabold text-lg sm:text-xl bg-gradient-to-r from-blush-200 via-pink-100 to-amber-200 bg-clip-text text-transparent">Class 12 IP Python</span>
+                    <span class="text-[10px] block font-bold text-blush-300 uppercase tracking-widest">Mentor: PRIYANSHU GUPTA</span>
+                </div>
+            </div>
+
+            <!-- Header Sound & Max Marks Controls -->
+            <div class="flex items-center space-x-3">
+                <button id="soundToggleBtn" class="p-2.5 rounded-full bg-blush-900/60 border border-blush-400/30 text-blush-200 hover:text-amber-300 hover:bg-blush-800 transition-all text-xs flex items-center gap-1.5 px-3">
+                    <i id="soundIcon" class="fa-solid fa-volume-high text-amber-300"></i>
+                    <span class="hidden sm:inline font-bold">Sound ON</span>
+                </button>
+
+                <div class="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-blush-500/20 border border-amber-400/40 text-amber-300 font-bold text-xs shadow-sm">
+                    <i class="fa-solid fa-crown text-amber-300"></i>
+                    <span>Max: 50 Marks</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-4xl mx-auto px-4 py-6 sm:px-6 w-full flex-grow flex items-center justify-center">
+
+        <!-- ================= 1. WELCOME SCREEN ================= -->
+        <section id="welcomeScreen" class="w-full text-center animate-pop-in py-2">
+            
+            <!-- Animated Boy Character Banner (Priyanshu Gupta) -->
+            <div class="relative inline-block mb-4">
+                <div class="relative w-36 h-36 sm:w-44 sm:h-44 mx-auto rounded-full bg-gradient-to-tr from-blush-400 via-pink-300 to-amber-300 p-1.5 shadow-2xl shadow-blush-500/40 animate-pulse-glow">
+                    <div class="w-full h-full bg-blush-950 rounded-full flex items-center justify-center relative overflow-hidden border-2 border-blush-300/40">
+                        <svg id="welcomeAvatarSvg" class="w-32 h-32 sm:w-40 sm:h-40 animate-boy-bounce" viewBox="0 0 100 100" fill="none">
+                            <!-- Injected dynamically -->
+                        </svg>
+                    </div>
+                </div>
+                <span class="inline-block mt-3 px-4 py-1.5 rounded-full text-xs font-extrabold bg-gradient-to-r from-blush-500/30 via-pink-500/30 to-amber-500/30 text-blush-100 border border-blush-400/40 shadow-sm">
+                    ✨ PRIYANSHU GUPTA: Your AI Python Guide! ✨
+                </span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl font-display font-extrabold tracking-tight mb-2 text-white">
+                Master <span class="bg-gradient-to-r from-blush-200 via-pink-200 to-amber-200 bg-clip-text text-transparent">Class 12 IP Python!</span>
+            </h1>
+            <p class="text-blush-200/90 max-w-xl mx-auto text-sm sm:text-base mb-6 leading-relaxed font-romantic">
+                Join Priyanshu Gupta in this interactive 25-question Python quiz with firecracker bursts, streak multipliers, and instant feedback!
+            </p>
+
+            <!-- Rules Card -->
+            <div class="glass-card rounded-3xl p-5 sm:p-7 mb-7 text-left max-w-2xl mx-auto relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 text-7xl opacity-10">💖</div>
+                <h3 class="font-display font-bold text-lg text-amber-300 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-sparkles text-blush-300"></i> Interactive Quiz Highlights
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-sm text-blush-100">
+                    <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-blush-950/70 border border-blush-500/30">
+                        <div class="w-9 h-9 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0 font-extrabold text-sm border border-emerald-500/40">
+                            +2
+                        </div>
+                        <div>
+                            <span class="font-bold text-white block">Right Answer</span>
+                            <span class="text-xs text-blush-300">+2 Marks + Firecrackers Burst 🎆</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-blush-950/70 border border-blush-500/30">
+                        <div class="w-9 h-9 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0 font-extrabold text-sm border border-amber-500/40">
+                            🔥
+                        </div>
+                        <div>
+                            <span class="font-bold text-white block">Streak Combos</span>
+                            <span class="text-xs text-blush-300">Build 2x, 3x, 5x streaks for bonus callouts!</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-blush-950/70 border border-blush-500/30">
+                        <div class="w-9 h-9 rounded-2xl bg-pink-500/20 text-pink-300 flex items-center justify-center shrink-0 font-extrabold text-sm border border-pink-500/40">
+                            ✨
+                        </div>
+                        <div>
+                            <span class="font-bold text-white block">2 AI Lifelines</span>
+                            <span class="text-xs text-blush-300">50:50 Sparkle & Priyanshu's Hint</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-blush-950/70 border border-blush-500/30">
+                        <div class="w-9 h-9 rounded-2xl bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0 font-extrabold text-sm border border-purple-500/40">
+                            25
+                        </div>
+                        <div>
+                            <span class="font-bold text-white block">Syllabus Questions</span>
+                            <span class="text-xs text-blush-300">Pandas DataFrames, Series & Matplotlib</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Start Button -->
+            <button id="startQuizBtn" class="group relative inline-flex items-center justify-center px-10 py-4 font-display font-extrabold text-lg text-blush-950 bg-gradient-to-r from-amber-300 via-blush-200 to-pink-300 rounded-2xl shadow-xl shadow-blush-500/30 hover:shadow-2xl hover:shadow-amber-400/40 hover:scale-105 active:scale-95 transition-all duration-300">
+                <span class="flex items-center gap-3">
+                    <span>Begin Your Magical IP Quest ✨</span>
+                    <i class="fa-solid fa-heart text-blush-700 text-lg group-hover:scale-125 transition-transform"></i>
+                </span>
+            </button>
+        </section>
+
+        <!-- ================= 2. ACTIVE QUIZ SCREEN ================= -->
+        <section id="quizScreen" class="w-full hidden">
+            
+            <!-- Top Progress, Score & Streak Bar -->
+            <div class="mb-4 space-y-2">
+                <div class="flex items-center justify-between text-xs font-bold text-blush-200">
+                    <span id="questionCounter" class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-heart text-blush-400"></i> Question 1 of 25
+                    </span>
+
+                    <!-- Streak Badge -->
+                    <div id="streakBadge" class="hidden px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-blush-500 text-blush-950 font-extrabold text-xs shadow-lg animate-bounce flex items-center gap-1">
+                        <i class="fa-solid fa-fire text-amber-100"></i>
+                        <span id="streakText">2x STREAK COMBO!</span>
+                    </div>
+
+                    <span id="scoreTracker" class="text-amber-300 font-mono text-xs sm:text-sm bg-blush-950/80 px-3 py-1 rounded-full border border-amber-400/30">
+                        Score: 0 / 50
+                    </span>
+                </div>
+
+                <!-- Heart Progress Bar -->
+                <div class="w-full h-3 bg-blush-950/80 rounded-full overflow-hidden p-0.5 border border-blush-800/60 shadow-inner">
+                    <div id="progressBar" class="h-full bg-gradient-to-r from-blush-400 via-pink-400 to-amber-300 rounded-full transition-all duration-300 w-0"></div>
+                </div>
+            </div>
+
+            <!-- Lifelines & Hint Bar -->
+            <div class="mb-4 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <button id="lifeline5050" class="px-3 py-1.5 rounded-xl bg-blush-900/70 border border-blush-400/40 hover:bg-blush-800 text-blush-100 text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i>
+                        <span>50:50 Lifeline</span>
+                    </button>
+                    <button id="lifelineHint" class="px-3 py-1.5 rounded-xl bg-blush-900/70 border border-blush-400/40 hover:bg-blush-800 text-blush-100 text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed">
+                        <i class="fa-solid fa-lightbulb text-amber-300"></i>
+                        <span>Priyanshu's Hint</span>
+                    </button>
+                </div>
+
+                <!-- Category Tag -->
+                <span id="categoryTag" class="px-3 py-1 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-wider bg-blush-500/20 text-blush-200 border border-blush-400/30">
+                    Pandas DataFrames
+                </span>
+            </div>
+
+            <!-- Hint Display Box -->
+            <div id="hintBox" class="hidden mb-4 p-3.5 rounded-2xl bg-amber-500/15 border border-amber-400/40 text-amber-200 text-xs font-semibold animate-pop-in flex items-start gap-2.5">
+                <span class="text-xl shrink-0">💡</span>
+                <div>
+                    <span class="font-bold block text-amber-300 mb-0.5">Priyanshu Gupta's Hint:</span>
+                    <span id="hintText"></span>
+                </div>
+            </div>
+
+            <!-- Feedback Banner -->
+            <div id="feedbackBanner" class="hidden mb-4 p-3 rounded-2xl font-bold text-center text-xs sm:text-sm transition-all animate-pop-in flex items-center justify-center gap-2 shadow-lg">
+                <span id="feedbackIcon" class="text-2xl"></span>
+                <span id="feedbackText"></span>
+            </div>
+
+            <!-- Question Card -->
+            <div id="questionCard" class="glass-card rounded-3xl p-5 sm:p-7 shadow-2xl relative overflow-hidden transition-all duration-300">
+                
+                <!-- Mascot Boy Header Row -->
+                <div class="flex items-center justify-between gap-4 mb-4 pb-4 border-b border-blush-800/50">
+                    <div class="flex items-center gap-3">
+                        <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-blush-400 to-amber-300 p-0.5 shrink-0 shadow-md">
+                            <div class="w-full h-full bg-blush-950 rounded-[14px] flex items-center justify-center overflow-hidden relative">
+                                <svg id="questionCharacterSvg" class="w-14 h-14 sm:w-18 sm:h-18 animate-boy-bounce" viewBox="0 0 100 100" fill="none">
+                                    <!-- Injected via JS -->
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <span id="characterName" class="text-xs sm:text-sm font-extrabold text-amber-300 block">PRIYANSHU GUPTA</span>
+                            <span id="characterStateText" class="text-[11px] text-blush-200/90 italic font-romantic block">"Let's solve this Python puzzle!"</span>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <span class="text-xs font-extrabold text-amber-300 block">
+                            +2 Marks
+                        </span>
+                        <span class="text-[10px] text-blush-300 uppercase tracking-widest font-semibold block">CBSE Board Standard</span>
+                    </div>
+                </div>
+
+                <!-- Question Text -->
+                <h2 id="questionText" class="text-base sm:text-lg font-bold text-white mb-4 leading-relaxed">
+                    Loading Question...
+                </h2>
+
+                <!-- Code Snippet Box -->
+                <div id="codeSnippetBox" class="hidden mb-5 p-3.5 rounded-xl bg-slate-950/90 font-mono text-xs sm:text-sm text-emerald-300 border border-blush-800/60 overflow-x-auto shadow-inner">
+                    <pre><code id="codeSnippetText"></code></pre>
+                </div>
+
+                <!-- 4 Options Container -->
+                <div id="optionsContainer" class="space-y-2.5">
+                    <!-- Options generated dynamically -->
+                </div>
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <div class="flex items-center justify-between mt-5">
+                <button id="quitBtn" class="px-4 py-2 text-xs font-bold text-blush-300 hover:text-blush-100 transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-left"></i> Home
+                </button>
+                <button id="nextBtn" disabled class="px-8 py-3 bg-gradient-to-r from-amber-300 via-blush-200 to-pink-300 hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed text-blush-950 font-display font-extrabold rounded-2xl shadow-lg transition-all flex items-center gap-2">
+                    <span id="nextBtnText">Next Question</span>
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= 3. FINAL RESULTS SCREEN ================= -->
+        <section id="resultScreen" class="w-full hidden animate-pop-in py-2">
+            <div class="glass-card rounded-3xl p-6 sm:p-10 shadow-2xl text-center max-w-2xl mx-auto relative overflow-hidden">
+                
+                <!-- Boy Mascot Result Banner -->
+                <div class="relative w-28 h-28 mx-auto rounded-full bg-gradient-to-tr from-amber-300 via-blush-400 to-pink-400 p-1 shadow-2xl mb-4 animate-pulse-glow">
+                    <div class="w-full h-full bg-blush-950 rounded-full flex items-center justify-center overflow-hidden">
+                        <svg id="resultCharacterSvg" class="w-24 h-24 animate-boy-bounce" viewBox="0 0 100 100" fill="none">
+                            <!-- Injected dynamically -->
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="rankBadgeTag" class="inline-block px-4 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest bg-amber-400 text-blush-950 shadow-md mb-2">
+                    PYTHON CHAMPION
+                </div>
+
+                <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-white mb-1" id="resultGradeTitle">
+                    Wonderful Job!
+                </h2>
+                <p class="text-blush-200 text-xs sm:text-sm mb-6 font-romantic" id="resultSubtitle">
+                    You completed all 25 Class 12 IP Python Questions!
+                </p>
+
+                <!-- Score Box -->
+                <div class="bg-blush-950/80 border border-blush-500/30 p-5 rounded-3xl mb-6 max-w-md mx-auto shadow-inner">
+                    <span class="text-xs font-bold uppercase tracking-widest text-blush-300 block mb-1">Your Total Marks</span>
+                    <div class="text-5xl font-display font-black bg-gradient-to-r from-amber-300 via-blush-100 to-pink-200 bg-clip-text text-transparent mb-1">
+                        <span id="finalScoreDisplay">0</span> <span class="text-2xl text-blush-300 font-sans">/ 50</span>
+                    </div>
+                    <span id="percentageDisplay" class="text-sm font-extrabold text-emerald-300">0% Score</span>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 text-left">
+                    <div class="p-3.5 rounded-2xl bg-blush-950/70 border border-blush-500/30">
+                        <span class="text-[10px] font-bold text-blush-300 block uppercase">Total Questions</span>
+                        <span class="text-xl font-bold text-white">25</span>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
+                        <span class="text-[10px] font-bold text-emerald-300 block uppercase">Right Answers</span>
+                        <span id="correctAnswersCount" class="text-xl font-bold text-emerald-300">0</span>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/30">
+                        <span class="text-[10px] font-bold text-blush-300 block uppercase">Wrong Answers</span>
+                        <span id="wrongAnswersCount" class="text-xl font-bold text-blush-300">0</span>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30">
+                        <span class="text-[10px] font-bold text-amber-300 block uppercase">Max Streak</span>
+                        <span id="maxStreakCount" class="text-xl font-bold text-amber-300">0</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button id="viewReviewBtn" class="py-3 px-6 bg-blush-900/70 hover:bg-blush-900 border border-blush-500/40 font-bold rounded-2xl transition-all flex items-center justify-center gap-2 text-white text-sm">
+                        <i class="fa-solid fa-list-check text-amber-300"></i>
+                        <span>Review All 25 Solutions</span>
+                    </button>
+                    <button id="retakeQuizBtn" class="py-3 px-8 bg-gradient-to-r from-amber-300 via-blush-200 to-pink-300 hover:opacity-90 text-blush-950 font-display font-extrabold rounded-2xl shadow-xl transition-all flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>Retake Quiz</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 4. DETAILED REVIEW SCREEN ================= -->
+        <section id="reviewScreen" class="w-full hidden animate-pop-in py-2">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-2xl font-display font-bold text-white">Answer Review & Explanations</h2>
+                    <p class="text-xs text-blush-300 font-romantic">Review your choices with Priyanshu Gupta!</p>
+                </div>
+                <button id="backToResultBtn" class="px-4 py-2 bg-blush-900/70 hover:bg-blush-900 border border-blush-500/40 font-bold rounded-xl text-xs text-blush-100 transition-colors">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Back
+                </button>
+            </div>
+
+            <!-- Review Cards List -->
+            <div id="reviewCardsContainer" class="space-y-3 max-h-[68vh] overflow-y-auto pr-1">
+                <!-- Dynamic cards JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="relative z-10 border-t border-blush-800/60 py-3.5 text-center text-xs text-blush-200/90 bg-blush-950/80 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-1">
+            <p>Class 12 Informatics Practices (IP) Python Quiz</p>
+            <p class="font-bold text-amber-300 flex items-center gap-1">
+                Created with <i class="fa-solid fa-heart text-blush-500 animate-heart-beat"></i> by <span class="text-white underline decoration-blush-400">PRIYANSHU GUPTA</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 25 CLASS 12 IP PYTHON QUESTIONS DATABASE ---
+        const CLASS12_IP_QUESTIONS = [
+            {
+                q: "Which Python library is primarily used for data manipulation and analysis in Class 12 IP?",
+                options: ["NumPy", "Pandas", "Matplotlib", "Tkinter"],
+                correct: 1,
+                category: "Pandas Basics",
+                code: null,
+                charState: "happy",
+                hint: "It provides Series and DataFrames for 1D and 2D tabular data manipulation.",
+                explanation: "Pandas is the main library in Class 12 IP for handling 1D Series and 2D DataFrames."
+            },
+            {
+                q: "What is the dimensional nature of a Pandas DataFrame?",
+                options: ["1-Dimensional", "2-Dimensional", "3-Dimensional", "Multi-Dimensional"],
+                correct: 1,
+                category: "Pandas Basics",
+                code: null,
+                charState: "thinking",
+                hint: "Series is 1D, whereas a DataFrame contains rows and columns.",
+                explanation: "A Series is 1-Dimensional, while a DataFrame is 2-Dimensional."
+            },
+            {
+                q: "Which attribute of a DataFrame returns a tuple representing the number of rows and columns?",
+                options: [".size", ".shape", ".ndim", ".dtypes"],
+                correct: 1,
+                category: "DataFrame Attributes",
+                code: "import pandas as pd\ndf = pd.DataFrame({'A': [1,2], 'B': [3,4]})\nprint(df.shape)",
+                charState: "thinking",
+                hint: "It gives dimensions as (rows, columns).",
+                explanation: "df.shape returns (rows, columns). Here, it returns (2, 2)."
+            },
+            {
+                q: "What does the df.head(3) function display?",
+                options: ["First 3 columns", "First 3 rows", "Last 3 rows", "3 random rows"],
+                correct: 1,
+                category: "Pandas Methods",
+                code: null,
+                charState: "happy",
+                hint: "head() inspects the top rows of a dataset.",
+                explanation: "head(n) returns the top/first n rows of a DataFrame or Series."
+            },
+            {
+                q: "Which Pandas method is used to import data from a CSV file into a DataFrame?",
+                options: ["pd.import_csv()", "pd.read_csv()", "pd.open_csv()", "pd.load_csv()"],
+                correct: 1,
+                category: "Data Transfer",
+                code: null,
+                charState: "thinking",
+                hint: "The function starts with 'read_...'",
+                explanation: "pd.read_csv('filename.csv') loads CSV data into a DataFrame."
+            },
+            {
+                q: "Which attribute is used to access the index (row labels) of a Pandas Series?",
+                options: [".rows", ".index", ".labels", ".keys"],
+                correct: 1,
+                category: "Series Attributes",
+                code: "import pandas as pd\ns = pd.Series([10, 20, 30], index=['a', 'b', 'c'])\nprint(s.index)",
+                charState: "happy",
+                hint: "It shares its name with row labels.",
+                explanation: "s.index gives the Index objects / row labels of the Series."
+            },
+            {
+                q: "What will be the output of the following Pandas code?",
+                options: ["10", "20", "30", "Error"],
+                correct: 1,
+                category: "Series Indexing",
+                code: "import pandas as pd\ns = pd.Series([10, 20, 30], index=['p', 'q', 'r'])\nprint(s['q'])",
+                charState: "thinking",
+                hint: "Look at the value paired with key 'q'.",
+                explanation: "s['q'] fetches the element corresponding to custom index label 'q', which is 20."
+            },
+            {
+                q: "Which Matplotlib Pyplot function is used to create a vertical bar chart?",
+                options: ["plt.plot()", "plt.bar()", "plt.hist()", "plt.pie()"],
+                correct: 1,
+                category: "Matplotlib",
+                code: null,
+                charState: "happy",
+                hint: "Name directly matches vertical 'bar'.",
+                explanation: "plt.bar() generates vertical bar charts; plt.barh() creates horizontal ones."
+            },
+            {
+                q: "Which function in Matplotlib is used to set the label for the X-axis?",
+                options: ["plt.set_x()", "plt.xlabel()", "plt.xtitle()", "plt.xname()"],
+                correct: 1,
+                category: "Matplotlib",
+                code: null,
+                charState: "happy",
+                hint: "Combines 'x' and 'label'.",
+                explanation: "plt.xlabel('Label Text') sets the text label for the horizontal X-axis."
+            },
+            {
+                q: "To display the plotted chart on screen in Matplotlib, which command is mandatory?",
+                options: ["plt.display()", "plt.show()", "plt.render()", "plt.draw()"],
+                correct: 1,
+                category: "Matplotlib",
+                code: null,
+                charState: "happy",
+                hint: "It 'shows' the window.",
+                explanation: "plt.show() opens the visual figure window and renders the created plot."
+            },
+            {
+                q: "In Pandas, what is the default value of axis parameter for column-wise operations?",
+                options: ["axis=0", "axis=1", "axis=-1", "axis='col'"],
+                correct: 1,
+                category: "Pandas Concepts",
+                code: null,
+                charState: "thinking",
+                hint: "axis=0 is for rows, axis=1 is for columns.",
+                explanation: "axis=0 refers to rows (index), while axis=1 refers to columns."
+            },
+            {
+                q: "What does the loc[] indexer in Pandas use for selection?",
+                options: ["Integer positions only", "Labels/names of rows and columns", "Boolean positions only", "Binary addresses"],
+                correct: 1,
+                category: "Indexing & Slicing",
+                code: null,
+                charState: "thinking",
+                hint: "loc is Label-based, iloc is Integer-position based.",
+                explanation: "df.loc[] is label-based, whereas df.iloc[] is integer index position based."
+            },
+            {
+                q: "What will df.isnull().sum() calculate in a DataFrame?",
+                options: ["Total number of rows", "Count of missing/NaN values per column", "Sum of all numeric values", "Count of non-zero numbers"],
+                correct: 1,
+                category: "Missing Data",
+                code: null,
+                charState: "happy",
+                hint: "isnull() finds missing NaNs, and sum() tallies them.",
+                explanation: "isnull() checks for missing NaN values, and sum() counts True instances per column."
+            },
+            {
+                q: "Which method is used to export/write a DataFrame into a CSV file?",
+                options: ["df.to_csv()", "df.write_csv()", "df.export_csv()", "df.save_csv()"],
+                correct: 0,
+                category: "Data Transfer",
+                code: null,
+                charState: "happy",
+                hint: "Function starts with 'to_...'",
+                explanation: "df.to_csv('filename.csv') writes the DataFrame contents to a CSV file."
+            },
+            {
+                q: "What type of data plot is ideal for visualizing frequency distributions of continuous variables?",
+                options: ["Line Plot", "Histogram", "Pie Chart", "Scatter Plot"],
+                correct: 1,
+                category: "Matplotlib",
+                code: null,
+                charState: "thinking",
+                hint: "Uses bins to group range distributions.",
+                explanation: "plt.hist() plots a Histogram, which is used for frequency distributions in bins."
+            },
+            {
+                q: "What is the output of total elements count attribute df.size for a DataFrame of shape (4, 3)?",
+                options: ["7", "12", "4", "3"],
+                correct: 1,
+                category: "DataFrame Attributes",
+                code: "import pandas as pd\n# DataFrame with 4 rows and 3 columns\nprint(4 * 3)",
+                charState: "thinking",
+                hint: "Multiply rows by columns.",
+                explanation: "df.size returns the total number of elements, calculated as rows × columns = 12."
+            },
+            {
+                q: "How do you drop a column named 'Age' from a DataFrame df?",
+                options: ["df.drop('Age', axis=0)", "df.drop('Age', axis=1)", "df.remove('Age')", "df.delete('Age')"],
+                correct: 1,
+                category: "DataFrame Alterations",
+                code: null,
+                charState: "thinking",
+                hint: "Remember column axis is 1.",
+                explanation: "To drop a column, axis=1 must be specified: df.drop('Age', axis=1)."
+            },
+            {
+                q: "Which Matplotlib plot parameter changes the color of the plot line?",
+                options: ["linecolor", "color", "c_fill", "style"],
+                correct: 1,
+                category: "Matplotlib",
+                code: "import matplotlib.pyplot as plt\nplt.plot([1,2], [3,4], color='red')",
+                charState: "happy",
+                hint: "Standard argument 'color' or 'c'.",
+                explanation: "The 'color' (or 'c') argument sets line/marker color in plt.plot()."
+            },
+            {
+                q: "What is the default index type generated for a Series if no custom index is supplied?",
+                options: ["Alphabetical (a, b, c...)", "RangeIndex (0, 1, 2...)", "One-based Index (1, 2, 3...)", "Random integers"],
+                correct: 1,
+                category: "Series Basics",
+                code: null,
+                charState: "thinking",
+                hint: "Starts from 0 and goes up by 1.",
+                explanation: "By default, Pandas assigns integer labels starting from 0 (RangeIndex)."
+            },
+            {
+                q: "Which property checks if a Series/DataFrame is completely empty?",
+                options: [".is_empty", ".empty", ".null", ".blank"],
+                correct: 1,
+                category: "Pandas Attributes",
+                code: null,
+                charState: "happy",
+                hint: "Direct single word attribute '.empty'.",
+                explanation: "df.empty returns True if the DataFrame has no data rows."
+            },
+            {
+                q: "What does the tail(2) function return on a Series?",
+                options: ["First 2 elements", "Last 2 elements", "Middle 2 elements", "Every 2nd element"],
+                correct: 1,
+                category: "Pandas Methods",
+                code: null,
+                charState: "happy",
+                hint: "Opposite of head().",
+                explanation: "tail(n) fetches the bottom/last n rows of the Pandas object."
+            },
+            {
+                q: "Which clause in read_csv() is used when the CSV file does not contain a header row?",
+                options: ["header=None", "no_header=True", "skip_header=1", "columns=False"],
+                correct: 0,
+                category: "Data Transfer",
+                code: "df = pd.read_csv('data.csv', header=None)",
+                charState: "thinking",
+                hint: "Set header parameter to None.",
+                explanation: "header=None tells Pandas that the first row is data, not column titles."
+            },
+            {
+                q: "What will df.T perform on a DataFrame df?",
+                options: ["Total sum", "Transpose (swap rows and columns)", "Truncate data", "Type conversion"],
+                correct: 1,
+                category: "DataFrame Attributes",
+                code: null,
+                charState: "happy",
+                hint: "Swaps rows into columns and vice versa.",
+                explanation: "df.T or df.transpose() transposes the rows and columns of the DataFrame."
+            },
+            {
+                q: "In Matplotlib, what does the parameter 'legend' help display?",
+                options: ["Chart title", "Axis labels", "Labels mapped to colored keys/lines", "Grid lines"],
+                correct: 2,
+                category: "Matplotlib",
+                code: null,
+                charState: "happy",
+                hint: "Key box identifying colored lines.",
+                explanation: "plt.legend() displays a box identifying which color line corresponds to which dataset."
+            },
+            {
+                q: "What is the correct syntax to add a new column 'Grade' with value 'A' to DataFrame df?",
+                options: ["df.add_column('Grade') = 'A'", "df['Grade'] = 'A'", "df.Grade.add('A')", "df.insert('Grade' == 'A')"],
+                correct: 1,
+                category: "DataFrame Alterations",
+                code: null,
+                charState: "happy",
+                hint: "Uses dictionary-style key assignment df['Column'].",
+                explanation: "Assigning values to df['NewCol'] = Value directly creates or overwrites the column."
+            }
+        ];
+
+        class SoftPinkCursorTrail {
+            constructor() {
+                this.canvas = document.getElementById('cursorCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.symbols = ['💖', '✨', '🌸', '💕', '⭐'];
+                this.resize();
+
+                window.addEventListener('resize', () => this.resize());
+                window.addEventListener('mousemove', (e) => this.addParticle(e.clientX, e.clientY));
+                window.addEventListener('touchmove', (e) => {
+                    if (e.touches.length > 0) {
+                        this.addParticle(e.touches[0].clientX, e.touches[0].clientY);
+                    }
+                });
+                
+                this.loop();
+            }
+
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            addParticle(x, y) {
+                if (Math.random() > 0.35) return;
+                this.particles.push({
+                    x: x,
+                    y: y,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2 - 1,
+                    size: Math.random() * 12 + 10,
+                    symbol: this.symbols[Math.floor(Math.random() * this.symbols.length)],
+                    alpha: 1,
+                    decay: Math.random() * 0.03 + 0.025
+                });
+            }
+
+            loop() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                for (let i = this.particles.length - 1; i >= 0; i--) {
+                    const p = this.particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.alpha -= p.decay;
+
+                    if (p.alpha <= 0) {
+                        this.particles.splice(i, 1);
+                        continue;
+                    }
+
+                    this.ctx.save();
+                    this.ctx.globalAlpha = p.alpha;
+                    this.ctx.font = `${p.size}px sans-serif`;
+                    this.ctx.fillText(p.symbol, p.x, p.y);
+                    this.ctx.restore();
+                }
+
+                requestAnimationFrame(() => this.loop());
+            }
+        }
+
+        class FireworksEngine {
+            constructor() {
+                this.canvas = document.getElementById('fireworksCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.animating = false;
+                this.resize();
+
+                window.addEventListener('resize', () => this.resize());
+            }
+
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            launchExplosion(x, y) {
+                const colors = ['#f43f5e', '#fbbf24', '#34d399', '#f472b6', '#ec4899', '#a78bfa', '#fb923c'];
+                const count = 75;
+
+                for (let i = 0; i < count; i++) {
+                    const angle = (Math.PI * 2 / count) * i + Math.random() * 0.2;
+                    const speed = Math.random() * 9 + 3;
+                    this.particles.push({
+                        x: x,
+                        y: y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        size: Math.random() * 4.5 + 2,
+                        alpha: 1,
+                        decay: Math.random() * 0.02 + 0.015,
+                        gravity: 0.12
+                    });
+                }
+
+                if (!this.animating) {
+                    this.animating = true;
+                    this.loop();
+                }
+            }
+
+            triggerMultipleBurst() {
+                const w = this.canvas.width;
+                const h = this.canvas.height;
+                this.launchExplosion(w * 0.5, h * 0.35);
+                setTimeout(() => this.launchExplosion(w * 0.28, h * 0.45), 140);
+                setTimeout(() => this.launchExplosion(w * 0.72, h * 0.4), 280);
+                setTimeout(() => this.launchExplosion(w * 0.5, h * 0.5), 420);
+            }
+
+            loop() {
+                if (!this.animating) return;
+
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                for (let i = this.particles.length - 1; i >= 0; i--) {
+                    const p = this.particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += p.gravity;
+                    p.alpha -= p.decay;
+
+                    if (p.alpha <= 0) {
+                        this.particles.splice(i, 1);
+                        continue;
+                    }
+
+                    this.ctx.save();
+                    this.ctx.globalAlpha = p.alpha;
+                    this.ctx.fillStyle = p.color;
+                    this.ctx.beginPath();
+                    this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    this.ctx.fill();
+                    this.ctx.restore();
+                }
+
+                if (this.particles.length > 0) {
+                    requestAnimationFrame(() => this.loop());
+                } else {
+                    this.animating = false;
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                }
+            }
+        }
+
+        class WebAudioSynthesizer {
+            constructor() {
+                this.ctx = null;
+                this.soundEnabled = true;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            }
+
+            toggleSound() {
+                this.soundEnabled = !this.soundEnabled;
+                return this.soundEnabled;
+            }
+
+            playClick() {
+                if (!this.soundEnabled) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(440, now);
+                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.05);
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.05);
+                } catch(e){}
+            }
+
+            playJoyfulCrackersSound() {
+                if (!this.soundEnabled) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+
+                    const notes = [523.25, 659.25, 783.99, 1046.50];
+                    notes.forEach((freq, idx) => {
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.05);
+                        
+                        gain.gain.setValueAtTime(0.16, now + idx * 0.05);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.05 + 0.35);
+
+                        osc.connect(gain);
+                        gain.connect(this.ctx.destination);
+                        osc.start(now + idx * 0.05);
+                        osc.stop(now + idx * 0.05 + 0.35);
+                    });
+
+                    const bufferSize = this.ctx.sampleRate * 0.12;
+                    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        data[i] = Math.random() * 2 - 1;
+                    }
+
+                    const noise = this.ctx.createBufferSource();
+                    noise.buffer = buffer;
+                    const noiseGain = this.ctx.createGain();
+                    noiseGain.gain.setValueAtTime(0.12, now);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+
+                    noise.connect(noiseGain);
+                    noiseGain.connect(this.ctx.destination);
+                    noise.start(now);
+                } catch (e) {}
+            }
+
+            playSadSound() {
+                if (!this.soundEnabled) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(260, now);
+                    osc.frequency.exponentialRampToValueAtTime(175, now + 0.28);
+
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.28);
+                } catch (e) {}
+            }
+
+            playStreakSound() {
+                if (!this.soundEnabled) return;
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    const notes = [587.33, 739.99, 880.00, 1174.66];
+                    notes.forEach((freq, idx) => {
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.06);
+                        gain.gain.setValueAtTime(0.18, now + idx * 0.06);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.06 + 0.3);
+                        osc.connect(gain);
+                        gain.connect(this.ctx.destination);
+                        osc.start(now + idx * 0.06);
+                        osc.stop(now + idx * 0.06 + 0.3);
+                    });
+                } catch(e){}
+            }
+        }
+
+        const fireworks = new FireworksEngine();
+        const cursorTrail = new SoftPinkCursorTrail();
+        const audioSynth = new WebAudioSynthesizer();
+
+        function generateBoyCharacterSvg(state) {
+            let eyesHtml = '';
+            let mouthHtml = '';
+            let cheeksHtml = '<circle cx="33" cy="52" r="5" fill="#f43f5e" opacity="0.3"/><circle cx="67" cy="52" r="5" fill="#f43f5e" opacity="0.3"/>';
+            let extraHtml = '';
+            let armHandHtml = '';
+
+            // Hair & Cap Base
+            const baseHairCap = `
+                <!-- Dark Stylish Hair -->
+                <path d="M 22 40 C 20 18, 80 18, 78 40 C 82 28, 70 14, 50 14 C 30 14, 18 28, 22 40 Z" fill="#1e1b4b" />
+                <path d="M 25 32 Q 35 18 52 26 Q 68 18 75 32 Q 62 26 50 32 Q 38 26 25 32 Z" fill="#312e81" />
+                <!-- Front Bangs -->
+                <path d="M 30 28 Q 40 38 48 30 Q 58 38 70 28 Q 60 22 48 24 Q 38 22 30 28 Z" fill="#1e1b4b" />
+            `;
+
+            switch (state) {
+                case 'correct':
+                case 'cheering':
+                    // Star Eyes & Big Open Smile
+                    eyesHtml = `
+                        <text x="27" y="47" font-size="14" fill="#fbbf24">⭐</text>
+                        <text x="57" y="47" font-size="14" fill="#fbbf24">⭐</text>
+                    `;
+                    mouthHtml = `<path d="M 36 55 Q 50 75 64 55 Z" fill="#be123c" stroke="#1e1b4b" stroke-width="2"/>`;
+                    extraHtml = `<text x="6" y="25" font-size="14">🎉</text><text x="76" y="25" font-size="14">🎆</text>`;
+                    armHandHtml = `
+                        <!-- Cheering Raised Arms -->
+                        <path d="M 14 65 Q 8 45 16 35" stroke="#fca5a5" stroke-width="6" stroke-linecap="round" fill="none"/>
+                        <circle cx="16" cy="33" r="5" fill="#fca5a5" />
+                        <path d="M 86 65 Q 92 45 84 35" stroke="#fca5a5" stroke-width="6" stroke-linecap="round" fill="none"/>
+                        <circle cx="84" cy="33" r="5" fill="#fca5a5" />
+                    `;
+                    break;
+
+                case 'wrong':
+                case 'sad':
+                    // Sweat Drop & Apologetic Mouth
+                    eyesHtml = `
+                        <ellipse cx="38" cy="42" rx="4" ry="6" fill="#1e1b4b" />
+                        <ellipse cx="62" cy="42" rx="4" ry="6" fill="#1e1b4b" />
+                        <path d="M 32 35 Q 38 38 44 36" stroke="#1e1b4b" stroke-width="2.5" fill="none" />
+                        <path d="M 56 36 Q 62 38 68 35" stroke="#1e1b4b" stroke-width="2.5" fill="none" />
+                    `;
+                    mouthHtml = `<circle cx="50" cy="58" r="4.5" stroke="#1e1b4b" stroke-width="2.5" fill="none"/>`;
+                    extraHtml = `<text x="72" y="28" font-size="14">💧</text>`;
+                    armHandHtml = `
+                        <!-- Hand on head -->
+                        <path d="M 78 70 Q 88 50 70 30" stroke="#fca5a5" stroke-width="5" stroke-linecap="round" fill="none"/>
+                        <circle cx="68" cy="28" r="5" fill="#fca5a5" />
+                    `;
+                    break;
+
+                case 'thinking':
+                case 'curious':
+                    // Hand on chin, looking up
+                    eyesHtml = `
+                        <ellipse cx="38" cy="40" rx="5" ry="6" fill="#1e1b4b" />
+                        <ellipse cx="62" cy="40" rx="5" ry="6" fill="#1e1b4b" />
+                        <circle cx="40" cy="38" r="2" fill="#ffffff" />
+                        <circle cx="64" cy="38" r="2" fill="#ffffff" />
+                        <!-- Eyebrow raised -->
+                        <path d="M 32 32 Q 38 28 44 32" stroke="#1e1b4b" stroke-width="2.5" fill="none" />
+                        <path d="M 56 30 Q 62 25 68 30" stroke="#1e1b4b" stroke-width="2.5" fill="none" />
+                    `;
+                    mouthHtml = `<path d="M 40 58 Q 50 54 60 58" stroke="#1e1b4b" stroke-width="2.5" stroke-linecap="round" fill="none"/>`;
+                    extraHtml = `<text x="74" y="22" font-size="12">💡</text>`;
+                    armHandHtml = `
+                        <!-- Hand thinking under chin -->
+                        <path d="M 60 78 Q 72 65 58 60" stroke="#fca5a5" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+                        <circle cx="56" cy="60" r="5" fill="#fca5a5" />
+                    `;
+                    break;
+
+                default: // Winking / Happy Welcome
+                    eyesHtml = `
+                        <!-- One Eye Open, One Winking -->
+                        <ellipse cx="36" cy="42" rx="5" ry="7" fill="#1e1b4b" />
+                        <circle cx="38" cy="40" r="2" fill="#ffffff" />
+                        <path d="M 56 42 Q 62 48 68 42" stroke="#1e1b4b" stroke-width="3" stroke-linecap="round" fill="none"/>
+                    `;
+                    mouthHtml = `<path d="M 36 55 Q 50 68 64 55" stroke="#1e1b4b" stroke-width="3.5" stroke-linecap="round" fill="none" />`;
+                    extraHtml = `<text x="72" y="22" font-size="11">✨</text>`;
+                    armHandHtml = `
+                        <path d="M 18 70 Q 10 58 14 48" stroke="#fca5a5" stroke-width="5" stroke-linecap="round" fill="none"/>
+                        <circle cx="14" cy="46" r="4.5" fill="#fca5a5" />
+                    `;
+                    break;
+            }
+
+            return `
+                <!-- Boy Character Container -->
+                <circle cx="50" cy="50" r="44" fill="url(#boyBgGrad)" />
+                <defs>
+                    <linearGradient id="boyBgGrad" x1="0" y1="0" x2="100" y2="100">
+                        <stop offset="0%" stop-color="#f472b6"/>
+                        <stop offset="100%" stop-color="#fbbf24"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- Hoodie / Shoulders -->
+                <path d="M 20 90 C 20 72, 80 72, 80 90 Z" fill="#db2777" />
+                <path d="M 36 76 L 50 90 L 64 76 Z" fill="#fbcfe8" />
+
+                <!-- Neck -->
+                <rect x="44" y="62" width="12" height="12" rx="3" fill="#fca5a5" />
+
+                <!-- Face -->
+                <ellipse cx="50" cy="48" rx="26" ry="24" fill="#fca5a5" />
+                <!-- Ears -->
+                <circle cx="24" cy="48" r="5" fill="#fca5a5" />
+                <circle cx="76" cy="48" r="5" fill="#fca5a5" />
+
+                ${baseHairCap}
+                ${eyesHtml}
+                ${cheeksHtml}
+                ${mouthHtml}
+                ${armHandHtml}
+                ${extraHtml}
+            `;
+        }
+
+        class IPQuizApp {
+            constructor() {
+                this.questions = CLASS12_IP_QUESTIONS;
+                this.currentIndex = 0;
+                this.score = 0;
+                this.streak = 0;
+                this.maxStreak = 0;
+                this.correctCount = 0;
+                this.wrongCount = 0;
+                this.userAnswers = [];
+                this.used5050 = false;
+                this.usedHint = false;
+
+                this.bindEvents();
+                this.initWelcomeAvatar();
+            }
+
+            initWelcomeAvatar() {
+                const welcSvg = document.getElementById('welcomeAvatarSvg');
+                if (welcSvg) welcSvg.innerHTML = generateBoyCharacterSvg('happy');
+            }
+
+            bindEvents() {
+                document.getElementById('startQuizBtn').addEventListener('click', () => {
+                    audioSynth.playClick();
+                    this.startQuiz();
+                });
+                document.getElementById('nextBtn').addEventListener('click', () => {
+                    audioSynth.playClick();
+                    this.nextQuestion();
+                });
+                document.getElementById('quitBtn').addEventListener('click', () => {
+                    audioSynth.playClick();
+                    if (confirm("Are you sure you want to return to home screen?")) {
+                        this.resetToHome();
+                    }
+                });
+                document.getElementById('retakeQuizBtn').addEventListener('click', () => {
+                    audioSynth.playClick();
+                    this.startQuiz();
+                });
+                document.getElementById('viewReviewBtn').addEventListener('click', () => {
+                    audioSynth.playClick();
+                    this.showReviewScreen();
+                });
+                document.getElementById('backToResultBtn').addEventListener('click', () => {
+                    audioSynth.playClick();
+                    this.showScreen('resultScreen');
+                });
+
+                // Sound toggle
+                document.getElementById('soundToggleBtn').addEventListener('click', () => {
+                    const enabled = audioSynth.toggleSound();
+                    const icon = document.getElementById('soundIcon');
+                    icon.className = enabled ? 'fa-solid fa-volume-high text-amber-300' : 'fa-solid fa-volume-xmark text-blush-400';
+                });
+
+                // Lifelines
+                document.getElementById('lifeline5050').addEventListener('click', () => this.use5050Lifeline());
+                document.getElementById('lifelineHint').addEventListener('click', () => this.useHintLifeline());
+            }
+
+            showScreen(id) {
+                ['welcomeScreen', 'quizScreen', 'resultScreen', 'reviewScreen'].forEach(s => {
+                    document.getElementById(s).classList.add('hidden');
+                });
+                document.getElementById(id).classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            resetToHome() {
+                document.body.className = "bg-soft-blush text-blush-100 min-h-screen flex flex-col justify-between font-sans relative overflow-x-hidden transition-all duration-500";
+                this.showScreen('welcomeScreen');
+            }
+
+            startQuiz() {
+                this.questions = [...CLASS12_IP_QUESTIONS].sort(() => Math.random() - 0.5);
+                this.currentIndex = 0;
+                this.score = 0;
+                this.streak = 0;
+                this.maxStreak = 0;
+                this.correctCount = 0;
+                this.wrongCount = 0;
+                this.userAnswers = [];
+                this.used5050 = false;
+                this.usedHint = false;
+
+                document.getElementById('lifeline5050').disabled = false;
+                document.getElementById('lifelineHint').disabled = false;
+
+                this.showScreen('quizScreen');
+                this.renderQuestion();
+            }
+
+            renderQuestion() {
+                const q = this.questions[this.currentIndex];
+                const total = this.questions.length;
+
+                document.body.className = "bg-soft-blush text-blush-100 min-h-screen flex flex-col justify-between font-sans relative overflow-x-hidden transition-all duration-500";
+                
+                // Hide Banner & Hint
+                document.getElementById('feedbackBanner').classList.add('hidden');
+                document.getElementById('hintBox').classList.add('hidden');
+
+                // Counters & Progress
+                document.getElementById('questionCounter').innerHTML = `<i class="fa-solid fa-heart text-blush-400"></i> Question ${this.currentIndex + 1} of ${total}`;
+                document.getElementById('scoreTracker').innerText = `Score: ${this.score} / 50`;
+                document.getElementById('progressBar').style.width = `${((this.currentIndex + 1) / total) * 100}%`;
+
+                // Streak Badge Update
+                const streakBadge = document.getElementById('streakBadge');
+                if (this.streak >= 2) {
+                    streakBadge.classList.remove('hidden');
+                    document.getElementById('streakText').innerText = `${this.streak}x STREAK COMBO!`;
+                } else {
+                    streakBadge.classList.add('hidden');
+                }
+
+                // Mascot Avatar State
+                const charSvg = document.getElementById('questionCharacterSvg');
+                const stateText = document.getElementById('characterStateText');
+                const charState = q.charState || 'happy';
+
+                charSvg.innerHTML = generateBoyCharacterSvg(charState);
+
+                if (charState === 'thinking') stateText.innerText = '"Think carefully about the syntax..."';
+                else if (charState === 'curious') stateText.innerText = '"Intriguing Python question!"';
+                else if (charState === 'cheering') stateText.innerText = '"Cheering for your full score!"';
+                else stateText.innerText = '"Priyanshu Gupta is here to assist!"';
+
+                // Question Details
+                document.getElementById('categoryTag').innerText = q.category || 'Python IP';
+                document.getElementById('questionText').innerText = q.q;
+
+                // Code snippet
+                const codeBox = document.getElementById('codeSnippetBox');
+                const codeText = document.getElementById('codeSnippetText');
+                if (q.code) {
+                    codeText.innerText = q.code;
+                    codeBox.classList.remove('hidden');
+                } else {
+                    codeBox.classList.add('hidden');
+                }
+
+                // Render 4 Options
+                const container = document.getElementById('optionsContainer');
+                container.innerHTML = '';
+
+                q.options.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = `option-btn w-full p-3.5 sm:p-4 rounded-2xl border border-blush-500/30 bg-blush-950/60 hover:bg-blush-900/80 hover:border-amber-300/80 font-semibold text-left flex items-center justify-between transition-all duration-200 text-xs sm:text-sm text-blush-100 group shadow-md`;
+                    btn.dataset.index = idx;
+
+                    btn.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-blush-900/80 border border-blush-500/40 flex items-center justify-center font-bold text-xs text-amber-300 group-hover:bg-amber-300 group-hover:text-blush-950 transition-colors shrink-0">
+                                ${String.fromCharCode(65 + idx)}
+                            </span>
+                            <span>${opt}</span>
+                        </div>
+                        <i class="status-icon fa-regular fa-heart text-blush-400/60 text-base shrink-0"></i>
+                    `;
+
+                    btn.addEventListener('click', () => this.handleOptionSelect(idx, btn));
+                    container.appendChild(btn);
+                });
+
+                // Next Button
+                const nextBtn = document.getElementById('nextBtn');
+                nextBtn.disabled = true;
+                document.getElementById('nextBtnText').innerText = (this.currentIndex === total - 1) ? 'Finish & See Scorecard' : 'Next Question';
+            }
+
+            use5050Lifeline() {
+                if (this.used5050) return;
+                this.used5050 = true;
+                document.getElementById('lifeline5050').disabled = true;
+
+                const q = this.questions[this.currentIndex];
+                const incorrectIndices = [0, 1, 2, 3].filter(i => i !== q.correct);
+                
+                incorrectIndices.sort(() => Math.random() - 0.5);
+                const toRemove = incorrectIndices.slice(0, 2);
+
+                const buttons = document.querySelectorAll('.option-btn');
+                buttons.forEach(btn => {
+                    const idx = parseInt(btn.dataset.index);
+                    if (toRemove.includes(idx)) {
+                        btn.classList.add('opacity-30', 'pointer-events-none');
+                        btn.innerHTML = `<span class="italic text-xs text-blush-400/50">✨ Removed by 50:50 Lifeline</span>`;
+                    }
+                });
+
+                audioSynth.playClick();
+            }
+
+            useHintLifeline() {
+                if (this.usedHint) return;
+                this.usedHint = true;
+                document.getElementById('lifelineHint').disabled = true;
+
+                const q = this.questions[this.currentIndex];
+                const hintBox = document.getElementById('hintBox');
+                document.getElementById('hintText').innerText = q.hint || "Review core Class 12 IP syllabus rules!";
+                hintBox.classList.remove('hidden');
+
+                audioSynth.playClick();
+            }
+
+            handleOptionSelect(selectedIndex, selectedBtn) {
+                const q = this.questions[this.currentIndex];
+                const isCorrect = selectedIndex === q.correct;
+                const allButtons = document.querySelectorAll('.option-btn');
+
+                allButtons.forEach(b => b.classList.add('pointer-events-none'));
+
+                const feedbackBanner = document.getElementById('feedbackBanner');
+                const feedbackText = document.getElementById('feedbackText');
+                const feedbackIcon = document.getElementById('feedbackIcon');
+                const charSvg = document.getElementById('questionCharacterSvg');
+                const stateText = document.getElementById('characterStateText');
+
+                if (isCorrect) {
+                    // CORRECT ANSWER
+                    this.score += 2;
+                    this.correctCount++;
+                    this.streak++;
+                    if (this.streak > this.maxStreak) this.maxStreak = this.streak;
+
+                    audioSynth.playJoyfulCrackersSound();
+                    if (this.streak >= 2) audioSynth.playStreakSound();
+
+                    fireworks.triggerMultipleBurst();
+                    this.spawnFloatingElements();
+
+                    document.body.className = "bg-soft-blush celebrate-bg text-blush-100 min-h-screen flex flex-col justify-between font-sans relative overflow-x-hidden transition-all duration-500";
+
+                    charSvg.innerHTML = generateBoyCharacterSvg('correct');
+                    stateText.innerText = this.streak >= 2 ? `"${this.streak}x STREAK! AWESOME SPEED! 🎆"` : '"YES! 100% Correct Answer! 🎆"';
+
+                    selectedBtn.classList.remove('border-blush-500/30', 'bg-blush-950/60');
+                    selectedBtn.classList.add('border-emerald-400', 'bg-emerald-500/25', 'text-emerald-200', 'shadow-xl', 'shadow-emerald-500/20');
+                    selectedBtn.querySelector('.status-icon').className = 'status-icon fa-solid fa-circle-check text-emerald-300 text-lg';
+
+                    feedbackBanner.classList.remove('hidden');
+                    feedbackBanner.className = 'mb-4 p-3 rounded-2xl font-bold text-center text-xs sm:text-sm transition-all animate-pop-in flex items-center justify-center gap-2 shadow-lg bg-emerald-500/20 border border-emerald-400/40 text-emerald-200';
+                    feedbackIcon.innerText = '🎆';
+                    feedbackText.innerText = `EXCELLENT! (+2 Marks) ${this.streak >= 2 ? `🔥 ${this.streak}x Streak Combo!` : ''}`;
+
+                } else {
+                    // WRONG ANSWER
+                    this.wrongCount++;
+                    this.streak = 0;
+                    audioSynth.playSadSound();
+
+                    const qCard = document.getElementById('questionCard');
+                    qCard.classList.add('animate-shake');
+                    setTimeout(() => qCard.classList.remove('animate-shake'), 450);
+
+                    document.body.className = "bg-soft-blush sad-bg text-blush-100 min-h-screen flex flex-col justify-between font-sans relative overflow-x-hidden transition-all duration-500";
+
+                    charSvg.innerHTML = generateBoyCharacterSvg('wrong');
+                    stateText.innerText = '"Oops! Don\'t worry, learn from this!"';
+
+                    selectedBtn.classList.remove('border-blush-500/30', 'bg-blush-950/60');
+                    selectedBtn.classList.add('border-rose-500', 'bg-rose-500/25', 'text-blush-200');
+                    selectedBtn.querySelector('.status-icon').className = 'status-icon fa-solid fa-circle-xmark text-blush-400 text-lg';
+
+                    const correctBtn = allButtons[q.correct];
+                    correctBtn.classList.remove('border-blush-500/30', 'bg-blush-950/60');
+                    correctBtn.classList.add('border-emerald-400', 'bg-emerald-500/25', 'text-emerald-200');
+                    correctBtn.querySelector('.status-icon').className = 'status-icon fa-solid fa-circle-check text-emerald-300 text-lg';
+
+                    feedbackBanner.classList.remove('hidden');
+                    feedbackBanner.className = 'mb-4 p-3 rounded-2xl font-bold text-center text-xs sm:text-sm transition-all animate-pop-in flex items-center justify-center gap-2 shadow-lg bg-rose-500/20 border border-blush-400/40 text-blush-200';
+                    feedbackIcon.innerText = '🌸';
+                    feedbackText.innerText = `Correct Choice: Option ${String.fromCharCode(65 + q.correct)}: ${q.options[q.correct]}`;
+                }
+
+                document.getElementById('scoreTracker').innerText = `Score: ${this.score} / 50`;
+
+                this.userAnswers.push({
+                    question: q.q,
+                    code: q.code,
+                    options: q.options,
+                    selected: selectedIndex,
+                    correct: q.correct,
+                    isCorrect: isCorrect,
+                    explanation: q.explanation
+                });
+
+                document.getElementById('nextBtn').disabled = false;
+            }
+
+            nextQuestion() {
+                if (this.currentIndex < this.questions.length - 1) {
+                    this.currentIndex++;
+                    this.renderQuestion();
+                } else {
+                    this.finishQuiz();
+                }
+            }
+
+            finishQuiz() {
+                document.body.className = "bg-soft-blush text-blush-100 min-h-screen flex flex-col justify-between font-sans relative overflow-x-hidden transition-all duration-500";
+                
+                const percentage = Math.round((this.score / 50) * 100);
+
+                document.getElementById('finalScoreDisplay').innerText = this.score;
+                document.getElementById('percentageDisplay').innerText = `${percentage}% Score`;
+                document.getElementById('correctAnswersCount').innerText = this.correctCount;
+                document.getElementById('wrongAnswersCount').innerText = this.wrongCount;
+                document.getElementById('maxStreakCount').innerText = `${this.maxStreak}x`;
+
+                const title = document.getElementById('resultGradeTitle');
+                const sub = document.getElementById('resultSubtitle');
+                const resSvg = document.getElementById('resultCharacterSvg');
+                const rankTag = document.getElementById('rankBadgeTag');
+
+                if (percentage >= 80) {
+                    rankTag.innerText = "👑 PYTHON CHAMPION";
+                    title.innerText = "Outstanding Mastery!";
+                    sub.innerText = "Priyanshu Gupta congratulates you on full Class 12 IP Python mastery!";
+                    resSvg.innerHTML = generateBoyCharacterSvg('cheering');
+                    fireworks.triggerMultipleBurst();
+                } else if (percentage >= 50) {
+                    rankTag.innerText = "💖 IP STAR SCHOLAR";
+                    title.innerText = "Great Performance!";
+                    sub.innerText = "Well done! Review the answers to boost your score to 100%!";
+                    resSvg.innerHTML = generateBoyCharacterSvg('happy');
+                } else {
+                    rankTag.innerText = "✨ PYTHON EXPLORER";
+                    title.innerText = "Good Effort!";
+                    sub.innerText = "Review Priyanshu's explanations below and give it another try!";
+                    resSvg.innerHTML = generateBoyCharacterSvg('thinking');
+                }
+
+                this.showScreen('resultScreen');
+            }
+
+            showReviewScreen() {
+                const container = document.getElementById('reviewCardsContainer');
+                container.innerHTML = '';
+
+                this.userAnswers.forEach((ans, idx) => {
+                    const card = document.createElement('div');
+                    card.className = `p-4 rounded-2xl border ${
+                        ans.isCorrect ? 'border-emerald-500/40 bg-emerald-500/10' : 'border-rose-500/40 bg-rose-500/10'
+                    } transition-all`;
+
+                    card.innerHTML = `
+                        <div class="flex items-start justify-between gap-3 mb-2">
+                            <span class="font-bold text-xs sm:text-sm text-white">Q${idx + 1}. ${ans.question}</span>
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold shrink-0 ${
+                                ans.isCorrect ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                            }">
+                                ${ans.isCorrect ? '+2 Marks' : '0 Marks'}
+                            </span>
+                        </div>
+                        ${ans.code ? `<pre class="mb-2.5 p-2 rounded-lg bg-slate-950 text-xs text-emerald-300 font-mono overflow-x-auto"><code>${ans.code}</code></pre>` : ''}
+                        <div class="text-xs space-y-1 mb-2">
+                            <div class="${ans.isCorrect ? 'text-emerald-300' : 'text-blush-300'} font-semibold">
+                                <i class="fa-solid ${ans.isCorrect ? 'fa-check' : 'fa-xmark'} mr-1"></i> Your Answer: Option ${String.fromCharCode(65 + ans.selected)} (${ans.options[ans.selected]})
+                            </div>
+                            ${!ans.isCorrect ? `
+                                <div class="text-emerald-300 font-semibold">
+                                    <i class="fa-solid fa-check mr-1"></i> Correct Answer: Option ${String.fromCharCode(65 + ans.correct)} (${ans.options[ans.correct]})
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="text-xs text-blush-100 bg-blush-950/80 p-2.5 rounded-xl border border-blush-800/60 leading-relaxed font-romantic">
+                            <span class="font-bold text-amber-300">Priyanshu's Explanation:</span> ${ans.explanation}
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+
+                this.showScreen('reviewScreen');
+            }
+
+            spawnFloatingElements() {
+                const elements = ['💖', '🌸', '✨', '💕', '⭐', '🌺', '🎆'];
+                for (let i = 0; i < 8; i++) {
+                    const span = document.createElement('span');
+                    span.className = 'floating-element';
+                    span.innerText = elements[Math.floor(Math.random() * elements.length)];
+                    span.style.left = `${10 + Math.random() * 80}%`;
+                    span.style.top = `${50 + Math.random() * 20}%`;
+                    document.body.appendChild(span);
+
+                    setTimeout(() => span.remove(), 2200);
+                }
+            }
+        }
+
+        // Initialize App
+        let quizApp;
+        window.addEventListener('DOMContentLoaded', () => {
+            quizApp = new IPQuizApp();
+        });
+    </script>
+</body>
+</html>
